@@ -1,5 +1,7 @@
 The following Guest Configuration artifacts can be used to check for Trend Micro Apex One running a Windows Server. Pull down the artifacts and use the following Powershell lines to publish the Guest Configuration as a Azure Policy in yur subscription.
 
+Tags: av, service
+
 PreReqs
 
 Download and Install PowerShell 7.1.3 or higher: 
