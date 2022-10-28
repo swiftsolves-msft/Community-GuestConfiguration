@@ -1,0 +1,38 @@
+/*
+@TargetNode='localhost'
+@GeneratedBy=anon
+@GenerationDate=02/08/2022 16:11:30
+@GenerationHost=anon
+*/
+
+instance of MSFT_ServiceResource as $MSFT_ServiceResource1ref
+{
+State = "Running";
+ ResourceID = "[Service]TenableNessusAgent";
+ SourceInfo = "C:\\DSC\\WindowsNessusAgent\\WindowsNessusAgentService\\WindowsNessusAgentService.ps1::7::9::Service";
+ Name = "Tenable Nessus Agent";
+ ModuleName = "PsDesiredStateConfiguration";
+ StartupType = "Automatic";
+ Ensure = "Present";
+
+ModuleVersion = "1.0";
+ ConfigurationName = "WindowsNessusAgentService";
+};
+instance of OMI_ConfigurationDocument
+
+                    {
+ Version="2.0.0";
+
+                        MinimumCompatibleVersion = "1.0.0";
+
+                        CompatibleVersionAdditionalProperties= {"Omi_BaseResource:ConfigurationName"};
+
+                        Author="anon";
+
+                        GenerationDate="02/08/2022 16:11:30";
+
+                        GenerationHost="anon";
+
+                        Name="WindowsNessusAgentService";
+
+                    };

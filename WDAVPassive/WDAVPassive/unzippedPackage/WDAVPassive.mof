@@ -1,0 +1,56 @@
+/*
+@TargetNode='localhost'
+@GeneratedBy=anon
+@GenerationDate=09/19/2022 00:05:15
+@GenerationHost=anon
+*/
+
+instance of MSFT_ServiceResource as $MSFT_ServiceResource1ref
+{
+State = "Running";
+ StartupType = "Automatic";
+ ModuleVersion = "2.12.0.0";
+ Name = "ntrtscan";
+ Ensure = "Present";
+ ResourceID = "[Service]ApexOneNTRealTimeScan";
+ SourceInfo = "C:\\DSC\\WDAVPassive\\WDAVPassive\\WDAVPassive.ps1::6::9::Service";
+ ModuleName = "PSDscResources";
+ ConfigurationName = "WDAVPassive";
+};
+instance of MSFT_RegistryResource as $MSFT_RegistryResource1ref
+{
+ValueData = {
+    "1"
+};
+ ModuleVersion = "2.12.0.0";
+ Ensure = "Present";
+ ResourceID = "[Registry]WDAVPassiveValueSet";
+ ValueType = "DWord";
+ SourceInfo = "C:\\DSC\\WDAVPassive\\WDAVPassive\\WDAVPassive.ps1::13::9::Registry";
+ ValueName = "ForceDefenderPassiveMode";
+ Key = "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows Advanced Threat Protection";
+ ModuleName = "PSDscResources";
+ Force = True;
+
+DependsOn = {
+    "[Service]ApexOneNTRealTimeScan"};
+ ConfigurationName = "WDAVPassive";
+};
+instance of OMI_ConfigurationDocument
+
+                    {
+ Version="2.0.0";
+
+                        MinimumCompatibleVersion = "1.0.0";
+
+                        CompatibleVersionAdditionalProperties= {"Omi_BaseResource:ConfigurationName"};
+
+                        Author="anon";
+
+                        GenerationDate="09/19/2022 00:05:15";
+
+                        GenerationHost="anon";
+
+                        Name="WDAVPassive";
+
+                    };

@@ -1,0 +1,231 @@
+{
+    "properties": {
+        "displayName": "Windows Crowdstrike Falcon Service.",
+        "policyType": "Custom",
+        "mode": "All",
+        "description": "Compliance check for Windows Crowdstrike Falcon Service. Ensure it is present on VM, Startup set to Automatic and Status is Running",
+        "metadata": {
+            "category": "Guest Configuration",
+            "guestConfiguration": {
+                "name": "CrowdStrikeFalconService",
+                "version": "1.0.0",
+                "contentType": "Custom",
+                "contentUri": "https://swiftsolvesdsc.blob.core.windows.net/guestconfiguration/CrowdStrikeFalconService.zip?sv=2020-08-04&st=2022-10-26T20%3A46%3A00Z&se=2025-10-26T20%3A46%3A00Z&sr=b&sp=rl&sig=d3QmjrwyrA5qtf3SPuS7YT4H2h%2Bdu%2B5%2BdNmjerWZULo%3D",
+                "contentHash": "F632F263F970FB7CC1E3861ED5641625A67F7C09CCAC5EB492BB2A29CA69DCE2",
+                "configurationParameter": {}
+                }
+            },
+            "parameters": {
+                "IncludeArcMachines": {
+                    "type": "string",
+                    "metadata": {
+                        "displayName": "Include Arc connected servers",
+                        "description": "By selecting this option, you agree to be charged monthly per Arc connected machine."
+                    },
+                    "allowedValues": [
+                        "True",
+                        "False"
+                    ],
+                    "defaultValue": "False"
+                }
+            },
+            "policyRule": {
+                "if": {
+                    "anyOf": [
+                        {
+                            "allOf": [
+                                {
+                                    "field": "type",
+                                    "equals": "Microsoft.Compute/virtualMachines"
+                                },
+                                {
+                                    "anyOf": [
+                                        {
+                                            "field": "Microsoft.Compute/imagePublisher",
+                                            "in": [
+                                                "esri",
+                                                "incredibuild",
+                                                "MicrosoftDynamicsAX",
+                                                "MicrosoftSharepoint",
+                                                "MicrosoftVisualStudio",
+                                                "MicrosoftWindowsDesktop",
+                                                "MicrosoftWindowsServerHPCPack"
+                                            ]
+                                        },
+                                        {
+                                            "allOf": [
+                                                {
+                                                    "field": "Microsoft.Compute/imagePublisher",
+                                                    "equals": "MicrosoftWindowsServer"
+                                                },
+                                                {
+                                                    "field": "Microsoft.Compute/imageSKU",
+                                                    "notLike": "2008*"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "allOf": [
+                                                {
+                                                    "field": "Microsoft.Compute/imagePublisher",
+                                                    "equals": "MicrosoftSQLServer"
+                                                },
+                                                {
+                                                    "field": "Microsoft.Compute/imageOffer",
+                                                    "notLike": "SQL2008*"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "allOf": [
+                                                {
+                                                    "field": "Microsoft.Compute/imagePublisher",
+                                                    "equals": "microsoft-dsvm"
+                                                },
+                                                {
+                                                    "field": "Microsoft.Compute/imageOffer",
+                                                    "equals": "dsvm-windows"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "allOf": [
+                                                {
+                                                    "field": "Microsoft.Compute/imagePublisher",
+                                                    "equals": "microsoft-ads"
+                                                },
+                                                {
+                                                    "field": "Microsoft.Compute/imageOffer",
+                                                    "in": [
+                                                        "standard-data-science-vm",
+                                                        "windows-data-science-vm"
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "allOf": [
+                                                {
+                                                    "field": "Microsoft.Compute/imagePublisher",
+                                                    "equals": "batch"
+                                                },
+                                                {
+                                                    "field": "Microsoft.Compute/imageOffer",
+                                                    "equals": "rendering-windows2016"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "allOf": [
+                                                {
+                                                    "field": "Microsoft.Compute/imagePublisher",
+                                                    "equals": "center-for-internet-security-inc"
+                                                },
+                                                {
+                                                    "field": "Microsoft.Compute/imageOffer",
+                                                    "like": "cis-windows-server-201*"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "allOf": [
+                                                {
+                                                    "field": "Microsoft.Compute/imagePublisher",
+                                                    "equals": "pivotal"
+                                                },
+                                                {
+                                                    "field": "Microsoft.Compute/imageOffer",
+                                                    "like": "bosh-windows-server*"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "allOf": [
+                                                {
+                                                    "field": "Microsoft.Compute/imagePublisher",
+                                                    "equals": "cloud-infrastructure-services"
+                                                },
+                                                {
+                                                    "field": "Microsoft.Compute/imageOffer",
+                                                    "like": "ad*"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "allOf": [
+                                                {
+                                                    "anyOf": [
+                                                        {
+                                                            "field": "Microsoft.Compute/virtualMachines/osProfile.windowsConfiguration",
+                                                            "exists": "true"
+                                                        },
+                                                        {
+                                                            "field": "Microsoft.Compute/virtualMachines/storageProfile.osDisk.osType",
+                                                            "like": "Windows*"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "anyOf": [
+                                                        {
+                                                            "field": "Microsoft.Compute/imageSKU",
+                                                            "exists": "false"
+                                                        },
+                                                        {
+                                                            "allOf": [
+                                                                {
+                                                                    "field": "Microsoft.Compute/imageSKU",
+                                                                    "notLike": "2008*"
+                                                                },
+                                                                {
+                                                                    "field": "Microsoft.Compute/imageOffer",
+                                                                    "notLike": "SQL2008*"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "allOf": [
+                                {
+                                    "value": "[parameters('IncludeArcMachines')]",
+                                    "equals": "true"
+                                },
+                                {
+                                    "field": "type",
+                                    "equals": "Microsoft.HybridCompute/machines"
+                                },
+                                {
+                                    "field": "Microsoft.HybridCompute/imageOffer",
+                                    "like": "windows*"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "then": {
+                    "effect": "auditIfNotExists",
+                    "details": {
+                        "type": "Microsoft.GuestConfiguration/guestConfigurationAssignments",
+                        "name": "CrowdStrikeFalconService",
+                        "existenceCondition": {
+                            "allOf": [
+                                {
+                                    "field": "Microsoft.GuestConfiguration/guestConfigurationAssignments/complianceStatus",
+                                    "equals": "Compliant"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "id": "/providers/Microsoft.Authorization/policyDefinitions/d1bdad51-dc8b-427b-926a-b7af155a3aab",
+        "name": "d1bdad51-dc8b-427b-926a-b7af155a3aab"
+    }

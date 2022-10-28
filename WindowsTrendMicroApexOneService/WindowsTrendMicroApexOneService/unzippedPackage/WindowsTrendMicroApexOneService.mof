@@ -1,0 +1,37 @@
+/*
+@TargetNode='localhost'
+@GeneratedBy=anon
+@GenerationDate=02/09/2022 16:03:49
+@GenerationHost=anon
+*/
+
+instance of MSFT_ServiceResource as $MSFT_ServiceResource1ref
+{
+SourceInfo = "C:\\DSC\\WindowsTrendMicroApexOneAgent\\WindowsTrendMicroApexOneService\\WindowsTrendMicroApexOneService.ps1::7::9::Service";
+ Name = "ntrtscan";
+ ModuleVersion = "2.12.0.0";
+ ResourceID = "[Service]ApexOneNTRealTimeScan";
+ StartupType = "Automatic";
+ ModuleName = "PSDscResources";
+ Ensure = "Present";
+ State = "Running";
+ ConfigurationName = "WindowsTrendMicroApexOneService";
+};
+instance of OMI_ConfigurationDocument
+
+                    {
+ Version="2.0.0";
+
+                        MinimumCompatibleVersion = "1.0.0";
+
+                        CompatibleVersionAdditionalProperties= {"Omi_BaseResource:ConfigurationName"};
+
+                        Author="anon";
+
+                        GenerationDate="02/09/2022 16:03:49";
+
+                        GenerationHost="anon";
+
+                        Name="WindowsTrendMicroApexOneService";
+
+                    };
