@@ -2,6 +2,8 @@ The following Guest Configuration artifacts can be used to check for a specified
 
 *Note: the current artifact package is looking for 3rd party av Trend Micro Apex One. You may want to modify the orginal WDAVPassive.ps1 for your 3rd party av.
 
+Tags: av, service, registry
+
 Pull down the artifacts and use the following Powershell lines to publish the Guest Configuration as a Azure Policy in yur subscription.
 
 PreReqs
