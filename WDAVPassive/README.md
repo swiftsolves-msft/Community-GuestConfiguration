@@ -1,4 +1,8 @@
-The following Guest Configuration artifacts can be used to check and implement Passive Mode for Windows Defender for AV (WDAV) a Windows Server. Pull down the artifacts and use the following Powershell lines to publish the Guest Configuration as a Azure Policy in yur subscription.
+The following Guest Configuration artifacts can be used to check for a specified 3rd party av, if present, then implement Passive Mode for Windows Defender for AV (WDAV) on a Windows Server by adding a registry key and value. 
+
+*Note: the current artifact package is looking for 3rd party av Trend Micro Apex One. You may want to modify the orginal WDAVPassive.ps1 for your 3rd party av.
+
+Pull down the artifacts and use the following Powershell lines to publish the Guest Configuration as a Azure Policy in yur subscription.
 
 PreReqs
 
