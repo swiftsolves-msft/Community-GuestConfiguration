@@ -1,0 +1,98 @@
+/*
+@TargetNode='localhost'
+@GeneratedBy=anon
+@GenerationDate=11/05/2022 20:41:46
+@GenerationHost=anon
+*/
+
+instance of MSFT_RegistryResource as $MSFT_RegistryResource1ref
+{
+ModuleVersion = "2.12.0.0";
+ Ensure = "Present";
+ ResourceID = "[Registry]SysmonConfig";
+ ModuleName = "PSDscResources";
+ ValueName = "SysmonVer";
+ ValueData = {
+    "1"
+};
+ SourceInfo = "C:\\DSC\\Sysmon\\Sysmon.ps1::6::9::Registry";
+ Force = True;
+ ValueType = "DWord";
+ Key = "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\Sysmon";
+ ConfigurationName = "Sysmon";
+};
+instance of MSFT_WindowsProcess as $MSFT_WindowsProcess1ref
+{
+ModuleVersion = "2.12.0.0";
+ Path = "C:\\Windows\\System32\\bitsadmin.exe";
+ ResourceID = "[WindowsProcess]SysmonDownload";
+ ModuleName = "PSDscResources";
+ Ensure = "Present";
+ SourceInfo = "C:\\DSC\\Sysmon\\Sysmon.ps1::15::9::WindowsProcess";
+ Arguments = "/transfer myDownloadJob1 /download /priority foreground https://download.sysinternals.com/files/Sysmon.zip C:\\Sysmon.zip";
+
+DependsOn = {
+    "[Registry]SysmonConfig"};
+ ConfigurationName = "Sysmon";
+};
+instance of MSFT_Archive as $MSFT_Archive1ref
+{
+ModuleVersion = "2.12.0.0";
+ Path = "C:\\Sysmon.zip";
+ ResourceID = "[Archive]ArchiveSysmon";
+ ModuleName = "PSDscResources";
+ Ensure = "Present";
+ SourceInfo = "C:\\DSC\\Sysmon\\Sysmon.ps1::21::9::Archive";
+ Force = True;
+ Destination = "C:\\";
+
+DependsOn = {
+    "[WindowsProcess]SysmonDownload"};
+ ConfigurationName = "Sysmon";
+};
+instance of MSFT_WindowsProcess as $MSFT_WindowsProcess2ref
+{
+ModuleVersion = "2.12.0.0";
+ Path = "C:\\Windows\\System32\\bitsadmin.exe";
+ ResourceID = "[WindowsProcess]SysmonConfigDownload";
+ ModuleName = "PSDscResources";
+ Ensure = "Present";
+ SourceInfo = "C:\\DSC\\Sysmon\\Sysmon.ps1::29::9::WindowsProcess";
+ Arguments = "/transfer myDownloadJob2 /download /priority foreground https://raw.githubusercontent.com/olafhartong/sysmon-modular/master/sysmonconfig-mde-augment.xml C:\\sysmonconfig-mde-augment.xml";
+
+DependsOn = {
+    "[Archive]ArchiveSysmon"};
+ ConfigurationName = "Sysmon";
+};
+instance of MSFT_WindowsProcess as $MSFT_WindowsProcess3ref
+{
+ModuleVersion = "2.12.0.0";
+ Path = "C:\\Sysmon64.exe";
+ ResourceID = "[WindowsProcess]SysmonInstall";
+ ModuleName = "PSDscResources";
+ Ensure = "Present";
+ SourceInfo = "C:\\DSC\\Sysmon\\Sysmon.ps1::35::9::WindowsProcess";
+ Arguments = "-accepteula -i C:\\sysmonconfig-mde-augment.xml";
+
+DependsOn = {
+    "[WindowsProcess]SysmonConfigDownload"};
+ ConfigurationName = "Sysmon";
+};
+instance of OMI_ConfigurationDocument
+
+                    {
+ Version="2.0.0";
+
+                        MinimumCompatibleVersion = "1.0.0";
+
+                        CompatibleVersionAdditionalProperties= {"Omi_BaseResource:ConfigurationName"};
+
+                        Author="anon";
+
+                        GenerationDate="11/05/2022 20:41:46";
+
+                        GenerationHost="anon";
+
+                        Name="Sysmon";
+
+                    };
