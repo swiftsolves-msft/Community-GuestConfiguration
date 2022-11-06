@@ -4,7 +4,7 @@ The following Guest Configuration artifacts can be used to Download the latest W
 
 Tags: sysmon, windowsprocess, registry, archive
 
-Pull down the artifacts and use the following Powershell lines to publish the Guest Configuration as a Azure Policy in yur subscription.
+Pull down the artifacts and use the following Powershell lines to publish the Guest Configuration as a Azure Policy in your subscription.
 
 PreReqs
 
