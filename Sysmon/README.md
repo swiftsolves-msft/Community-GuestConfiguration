@@ -1,6 +1,6 @@
 The following Guest Configuration artifacts can be used to Download the latest Windows Sysinternals Sysmon, unpack zip, and downloads [Olaf Hartong's Sysmon Configuration](https://github.com/olafhartong/sysmon-modular/blob/master/sysmonconfig-mde-augment.xml "Olaf Hartong's Sysmon Configuration") to help augment logging support for MDE sysmonconfig-mde-augment.xml, finally install Sysmon with this configuration. 
 
-*Note: You can download and update Sysmon.ps1 and recomile to use a differnt Sysmon Configuration as well. SwiftOnSecurity has a great repoistory of [Sysmon configuration files here](https://github.com/SwiftOnSecurity/sysmon-config/blob/master/sysmonconfig-export.xml "Sysmon configuration files here")
+*Note: You can download and update Sysmon.ps1 and recompile to use a differnt Sysmon Configuration as well. SwiftOnSecurity has a great repoistory of [Sysmon configuration files here](https://github.com/SwiftOnSecurity/sysmon-config/blob/master/sysmonconfig-export.xml "Sysmon configuration files here")
 
 Tags: sysmon, windowsprocess, registry, archive
 
