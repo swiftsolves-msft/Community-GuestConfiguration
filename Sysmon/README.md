@@ -1,12 +1,17 @@
-The following Guest Configuration artifacts can be used to Download the latest Windows Sysinternals Sysmon, unpack zip, and downloads [Olaf Hartong's Sysmon Configuration](https://github.com/olafhartong/sysmon-modular/blob/master/sysmonconfig-mde-augment.xml "Olaf Hartong's Sysmon Configuration") to help augment logging support for MDE sysmonconfig-mde-augment.xml, finally install Sysmon with this configuration. 
+## Description
 
-*Note: You can download and update Sysmon.ps1 and recompile to use a differnt Sysmon Configuration as well. SwiftOnSecurity has a great repoistory of [Sysmon configuration files here](https://github.com/SwiftOnSecurity/sysmon-config/blob/master/sysmonconfig-export.xml "Sysmon configuration files here")
+The following Guest Configuration artifacts can be used to Download the latest Windows Sysinternals Sysmon, unpack zip, and downloads [Olaf Hartong's Sysmon Configuration](https://github.com/olafhartong/sysmon-modular/blob/master/sysmonconfig-mde-augment.xml "Olaf Hartong's Sysmon Configuration") to help augment logging support for MDE sysmonconfig-mde-augment.xml, finally install Sysmon with this configuration. 
 
 Tags: sysmon, windowsprocess, registry, archive
 
 Pull down the artifacts and use the following Powershell lines to publish the Guest Configuration as a Azure Policy in your subscription.
 
-PreReqs
+#### To learn more about Olaf Hartong's research please read [Blog Post 1](https://medium.com/falconforce/sysmon-vs-microsoft-defender-for-endpoint-mde-internals-0x01-1e5663b10347 "Blog Post 1") , [Blog Post 2](https://medium.com/falconforce/microsoft-defender-for-endpoint-internals-0x02-audit-settings-and-telemetry-1d0af3ebfb27 "Blog Post 2") , [Blog Post 3](https://medium.com/falconforce/microsoft-defender-for-endpoint-internals-0x03-mde-telemetry-unreliability-and-log-augmentation-ec6e7e5f406f "Blog Post 3")
+
+#### *Note:*
+You can download and update Sysmon.ps1 and recompile to use a differnt Sysmon Configuration as well. SwiftOnSecurity has a great repoistory of [Sysmon configuration files here](https://github.com/SwiftOnSecurity/sysmon-config/blob/master/sysmonconfig-export.xml "Sysmon configuration files here")
+
+## PreReqs
 
 Download and Install PowerShell 7.1.3 or higher: 
 
