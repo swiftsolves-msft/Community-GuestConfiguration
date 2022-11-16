@@ -1,6 +1,10 @@
-The following Guest Configuration artifacts can be used to check for Crowd Strike running a Windows Server. Pull down the artifacts and use the following Powershell lines to publish the Guest Configuration as a Azure Policy in yur subscription.
+The following Guest Configuration artifacts can be used to check for the absence of Sophos AV running a Windows Server. If not found then download the Sophos AV from a your Sophos Central URL, then install Sophos AV. Because this uses a Sophos Central URL unquie to your tenant you must use Sophos.ps1 and edit aand replace the URL and Compile through all the steps. Use the following Powershell lines to compile and publish the Guest Configuration as a Azure Policy in yur subscription.
 
-Tags: edr, service
+To obtain the Sophos Agent URL to download the SophosSetup.exe installer, Go to Sophos Central, Protect Devices, and righ click and copy link on the Windows Installer link
+
+![](https://github.com/swiftsolves-msft/Community-GuestConfiguration/raw/main/images/sophoscentral.png)
+
+Tags: av, edr, service
 
 PreReqs
 
@@ -19,14 +23,14 @@ Import-Module PSDscResources
 Connect-AzAccount
 ```
 
-Steps 1 through 4 are completed, details can be [found here](https://techcommunity.microsoft.com/t5/microsoft-defender-for-cloud/7-steps-to-author-develop-and-deploy-custom-recommendations-for/ba-p/3166026 "found here")
+Steps 1 through 4 are completed, details can be [found here](https://swiftsolves.substack.com/p/remix-with-a-twist-7-steps-to-author "found here")
 
 #### [Step 5](https://docs.microsoft.com/en-us/azure/governance/policy/how-to/guest-configuration-create-test#validate-the-configuration-package-meets-requirements "Step 5"): Publish custom Guest Configuration package to Azure Blob Storage
 
 In this step you will use another GuestConfiguration cmdlet to upload the .zip package you tested previously to a Azure Blob Storage account – in addition a blob uri will be returned with a sas signature that lasts a few years. This sas based signature will be used when creating the Azure policy and publishing it in the next step. 
 
 ```
-Publish-GuestConfigurationPackage -Path './CrowdStrikeFalconService/CrowdStrikeFalconService.zip' `
+Publish-GuestConfigurationPackage -Path './WindowsSophos/WidowsSophos.zip' `
 -ResourceGroupName rgsomestorageDSC -StorageAccountName somestorage | % ContentUri
 ```
 
@@ -45,11 +49,12 @@ With the new guid and sas blob uri use the following ps cmdlets and replace wher
 ```
 New-GuestConfigurationPolicy `
   -PolicyId '79436b22-db38-4367-b41d-62a8181faf2c' `
-  -ContentUri 'https://somestorage.blob.core.windows.net/guestconfiguration/CrowdStrikeFalconService.zip?sv=2020-08-04&st=2022-02-08T17%3A12%3A03Z&se=2025-02-08T17%3A12%3A03Z&sr=b&sp=rl&sig' `
-  -DisplayName 'Windows Crowd Strike Service.' `
-  -Description 'Compliance check for Windows Crowd Strike Falcon Sensor. Ensure it is present on VM, Startup set to Automatic and Status is Running' `
+  -ContentUri 'https://somestorage.blob.core.windows.net/guestconfiguration/WindowsSophos.zip?sv=2020-08-04&st=2022-02-08T17%3A12%3A03Z&se=2025-02-08T17%3A12%3A03Z&sr=b&sp=rl&sig' `
+  -DisplayName 'Windows Sophos Service.' `
+  -Description 'Check for Windows Sophos AV Service. Ensure it is present on VM, if absent then download and install Sophos AV' `
   -Path './policies' `
   -Platform 'Windows' `
+  -Mode ApplyAndAutoCorrect `
   -Version 1.0.0 `
   -Verbose
 ```
