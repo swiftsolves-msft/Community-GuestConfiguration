@@ -25,6 +25,34 @@ Connect-AzAccount
 
 Steps 1 through 4 are completed, details can be [found here](https://swiftsolves.substack.com/p/remix-with-a-twist-7-steps-to-author "found here")
 
+#### [Step 1](https://swiftsolves.substack.com/i/74598574/step-test-guest-configuration-policy-in-local-environment "Step 1"): Build Authoring AM | Author DSC
+
+Be sure to modify the URL for the download process for Sophos AV
+
+#### [Step 2](https://learn.microsoft.com/en-us/powershell/dsc/configurations/configurations?view=dsc-1.1#compiling-the-configuration "Step 2"): Compile DSC to create .MOF
+
+```
+. .\Sophos.ps1 
+Sophos
+```
+
+#### [Step 3](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/machine-configuration-create#create-a-configuration-package-artifact "Step 3"): Create a Guest Configuration package .ZIP
+
+```
+New-GuestConfigurationPackage `
+  -Name 'WindowsSophos' `
+  -Configuration './Sophos/Sophos.mof' `
+  -Type AuditandSet `
+  -Force
+```
+
+#### [Step 4](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/machine-configuration-create-test#validate-the-configuration-package-meets-requirements "Step 4"): Test Guest Configuration Policy in enviroment
+
+```
+Start-GuestConfigurationPackageRemediation -Path ./WindowsSophos/WindowsSophos.zip
+```
+
+
 #### [Step 5](https://docs.microsoft.com/en-us/azure/governance/policy/how-to/guest-configuration-create-test#validate-the-configuration-package-meets-requirements "Step 5"): Publish custom Guest Configuration package to Azure Blob Storage
 
 In this step you will use another GuestConfiguration cmdlet to upload the .zip package you tested previously to a Azure Blob Storage account – in addition a blob uri will be returned with a sas signature that lasts a few years. This sas based signature will be used when creating the Azure policy and publishing it in the next step. 
