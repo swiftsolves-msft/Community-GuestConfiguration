@@ -1,4 +1,4 @@
-The following Guest Configuration artifacts can be used to check for the absence of Sophos AV running a Windows Server. If not found then download the Sophos AV from a your Sophos Central URL, then install Sophos AV. Because this uses a Sophos Central URL unquie to your tenant you must use Sophos.ps1 and edit aand replace the URL and Compile through all the steps. Use the following Powershell lines to compile and publish the Guest Configuration as a Azure Policy in yur subscription.
+The following Guest Configuration artifacts can be used to check for the absence of Sophos AV running a Windows Server. If not found then download the Sophos AV from a your Sophos Central URL, then install Sophos AV. Because this uses a Sophos Central URL unquie to your tenant you must use Sophos.ps1 and edit and replace the URL and Compile through all the steps. Use the following Powershell lines to compile and publish the Guest Configuration as a Azure Policy in yur subscription.
 
 To obtain the Sophos Agent URL to download the SophosSetup.exe installer, Go to Sophos Central, Protect Devices, and righ click and copy link on the Windows Installer link
 
