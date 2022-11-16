@@ -23,7 +23,7 @@ Import-Module PSDscResources
 Connect-AzAccount
 ```
 
-Steps 1 through 4 are completed, details can be [found here](https://swiftsolves.substack.com/p/remix-with-a-twist-7-steps-to-author "found here")
+Details can be [found here](https://swiftsolves.substack.com/p/remix-with-a-twist-7-steps-to-author "found here")
 
 #### [Step 1](https://swiftsolves.substack.com/i/74598574/step-test-guest-configuration-policy-in-local-environment "Step 1"): Build Authoring AM | Author DSC
 
