@@ -27,7 +27,7 @@ Details can be [found here](https://swiftsolves.substack.com/p/remix-with-a-twis
 
 #### [Step 1](https://swiftsolves.substack.com/i/74598574/step-test-guest-configuration-policy-in-local-environment "Step 1"): Build Authoring AM | Author DSC
 
-Be sure to modify the URL for the download process for Sophos AV
+Follow the details above to build authoring VM, Checkout Sophos.ps1 artifact and Be sure to modify the URL for the download process for Sophos AV
 
 #### [Step 2](https://learn.microsoft.com/en-us/powershell/dsc/configurations/configurations?view=dsc-1.1#compiling-the-configuration "Step 2"): Compile DSC to create .MOF
 
