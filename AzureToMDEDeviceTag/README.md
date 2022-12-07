@@ -1,4 +1,4 @@
-The following Guest Configuration artifacts can be used to check for MDE Tag and create one. This can be useful for Device Groups and filtering Azure and Arc connected VMs via Defender for Servers in Defender for Cloud. You may want these Windows Servers with differnt AIRs, Permissions via Tag and Device group as well. Pull down the artifacts and use the following Powershell lines to publish the Guest Configuration as a Azure Policy in yur subscription.
+The following Guest Configuration artifacts can be used to check for MDE Tag and create one. This can be useful for Device Groups and filtering Azure and Arc connected VMs via Defender for Servers in Defender for Cloud while operating in MDE security.microsoft.com portal. You may want these Windows Servers with differnt AIRs, Permissions via Tag and Device group as well in the MDE portal. Pull down the artifacts and use the following Powershell lines to publish the Guest Configuration as a Azure Policy in yur subscription.
 
 Tags: edr, registry
 
