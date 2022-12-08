@@ -1,0 +1,64 @@
+/*
+@TargetNode='localhost'
+@GeneratedBy=anon
+@GenerationDate=12/08/2022 22:57:33
+@GenerationHost=anon
+*/
+
+instance of MSFT_ScriptResource as $MSFT_ScriptResource1ref
+{
+ModuleVersion = "2.12.0.0";
+ GetScript = " @{ Result = (Get-Item 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows Advanced Threat Protection\\DeviceTagging').Name } ";
+ SetScript = "\n                New-Item -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows Advanced Threat Protection\\DeviceTagging' -Force\n                New-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows Advanced Threat Protection\\DeviceTagging' -Name  'Group' -Value \"MDCOnboarded\" -PropertyType 'String' -Force\n            ";
+ ModuleName = "PSDscResources";
+ ResourceID = "[Script]RegPathMDEGroup";
+ TestScript = " Test-Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows Advanced Threat Protection\\DeviceTagging' ";
+ SourceInfo = "C:\\DSC\\AzureTagtoMDETag\\AzureTagtoMDETag.ps1::7::9::Script";
+ ConfigurationName = "AzureTagtoMDETag";
+};
+instance of MSFT_RegistryResource as $MSFT_RegistryResource1ref
+{
+ModuleVersion = "2.12.0.0";
+ ValueName = "";
+ SourceInfo = "C:\\DSC\\AzureTagtoMDETag\\AzureTagtoMDETag.ps1::17::9::Registry";
+ Ensure = "Present";
+ ModuleName = "PSDscResources";
+ ResourceID = "[Registry]MDETagKey";
+ Key = "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows Advanced Threat Protection\\DeviceTagging";
+
+DependsOn = {
+    "[Script]RegPathMDEGroup"};
+ ConfigurationName = "AzureTagtoMDETag";
+};
+instance of MSFT_ScriptResource as $MSFT_ScriptResource2ref
+{
+ModuleVersion = "2.12.0.0";
+ GetScript = "\n                $currentItem = Get-ItemPropertyValue -Name Group 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows Advanced Threat Protection\\DeviceTagging'\n                return @{ 'Result' = \"$currentItem\" }\n            ";
+ SetScript = "\n                $metadata = Invoke-RestMethod -Headers @{\"Metadata\"=\"true\"} -Method GET -Uri \"http://169.254.169.254/metadata/instance?api-version=2021-02-01\" #| ConvertTo-Json -Depth 64\n                $rawtags = $metadata.compute.tags\n\n                # Change value of parameter -Pattern ex. \"Project:\" for Azure tag you want to be placed for MDE Tag\n                $tag = $rawtags.Split(\";\") | Select-String -Pattern \"project:\"\n\n                New-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows Advanced Threat Protection\\DeviceTagging' -Name  'Group' -Value $tag -PropertyType 'String' -Force\n\n            ";
+ ModuleName = "PSDscResources";
+ ResourceID = "[Script]AzureTagtoMDETagRegValue";
+ TestScript = "\n                $state = [scriptblock]::Create($GetScript).Invoke()\n\n                $azmetadata = Invoke-RestMethod -Headers @{\"Metadata\"=\"true\"} -Method GET -Uri \"http://169.254.169.254/metadata/instance?api-version=2021-02-01\" #| ConvertTo-Json -Depth 64\n                $rawaztags = $azmetadata.compute.tags\n\n                # Change value of parameter -Pattern ex. \"Project:\" for Azure tag you want to be placed for MDE Tag\n                $aztag = $rawaztags.Split(\";\") | Select-String -Pattern \"project:\"\n\n\n                if( $state.Result -eq $aztag )\n                {\n                    Write-Verbose -Message 'True'\n                    return $true\n                }\n                Write-Verbose -Message 'False'\n                return $false\n            \n            ";
+ SourceInfo = "C:\\DSC\\AzureTagtoMDETag\\AzureTagtoMDETag.ps1::25::9::Script";
+
+DependsOn = {
+    "[Registry]MDETagKey"};
+ ConfigurationName = "AzureTagtoMDETag";
+};
+instance of OMI_ConfigurationDocument
+
+                    {
+ Version="2.0.0";
+
+                        MinimumCompatibleVersion = "1.0.0";
+
+                        CompatibleVersionAdditionalProperties= {"Omi_BaseResource:ConfigurationName"};
+
+                        Author="anon";
+
+                        GenerationDate="12/08/2022 22:57:33";
+
+                        GenerationHost="anon";
+
+                        Name="AzureTagtoMDETag";
+
+                    };
